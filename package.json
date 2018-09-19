@@ -5,7 +5,7 @@
   "main": "app.js",
   "bin": "app.js",
   "scripts": {
-    "package": "pkg package.json -t latest-win-x64 --out-path dist && cp ./node_modules/opn/xdg-open ./dist/xdg-open && cp"
+    "start": "node app.js"
   },
   "author": "Jules DELPLA",
   "license": "ISC",
