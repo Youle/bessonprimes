@@ -58,7 +58,7 @@ app.delete('/sell/:id', function(req, res) {
     res.send({data: utils.getCompleteSells()});
 });
 
-app.listen(3000);
+app.listen(8080);
 
 console.log("Running at Port 3000");
 
