@@ -2,10 +2,10 @@
   "name": "besson_sale",
   "version": "0.1.0",
   "description": "Page to make some magic about sales benefits",
-  "main": "app.js",
-  "bin": "app.js",
+  "main": "index.js",
+  "bin": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node index.js"
   },
   "author": "Jules DELPLA",
   "license": "ISC",
