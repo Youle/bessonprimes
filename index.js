@@ -1,66 +1,7 @@
 var express = require("express");
 var path = require("path");
-var utils = Utils;
 var _ = require('lodash');
-
-var app = express();
-
 var fs = require('fs');
-var obj;
-app.use(express.static(__dirname + '/public'));
-app.use(express.json());
-
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname + '/public/index.html'));
-    //__dirname : It will resolve to your project folder.
-});
-
-app.get('/configuration', function (req, res) {
-    res.sendFile(path.join(__dirname + '/public/configuration.html'));
-});
-
-app.get('/save', function(req, res) {
-    fs.readFile('saves/last.json', 'utf8', function (err, data) {
-        if (err) throw err;
-        res.send(JSON.parse(data));
-    });
-});
-
-app.get('/steps', function(req, res) {
-    fs.readFile('saves/last.json', 'utf8', function (err, data) {
-        if (err) throw err;
-        res.send(JSON.parse(data).config.steps);
-    });
-});
-
-
-app.get('/sellers', function(req, res) {
-    res.send(utils.getData().sellers);
-});
-
-app.get('/sells', function(req, res) {
-    res.send({data: utils.getCompleteSells()})
-});
-
-app.post('/add/table', function(req, res) {
-    req.body.id = utils.generateId();
-    utils.addEntry(req.body);
-    res.send({data: utils.getCompleteSells()});
-});
-
-app.post('/sell/:id/:sellerId', function(req, res){
-    utils.updateEntry(req.params.id, req.params.sellerId, req.body);
-    res.send({data: utils.getCompleteSells()});
-});
-
-app.delete('/sell/:id', function(req, res) {
-    utils.deleteEntry(req.params.id);
-    res.send({data: utils.getCompleteSells()});
-});
-
-app.listen(8080);
-
-console.log("Running at Port 3000");
 
 // pkg package.json --target latest-win-x64 -o bouty.exe
 
@@ -69,10 +10,10 @@ function _getFile() {
 }
 
 function getData() {
-    if (!Utils.data) {
-        Utils.data = _getFile();
+    if (!utils.data) {
+        utils.data = _getFile();
     }
-    return Utils.data;
+    return utils.data;
 }
 
 function _getThresholds() {
@@ -109,7 +50,7 @@ function _calculateBounties(value) {
 
 function updateData(data) {
     fs.writeFileSync('saves/last.json', JSON.stringify(data), 'utf-8');
-    Utils.data = _getFile();
+    utils.data = _getFile();
     return getData();
 }
 
@@ -193,8 +134,7 @@ function deleteEntry(id) {
     });
     updateData(data);
 }
-
-var Utils = {
+var utils = {
     data: null,
     getData: getData,
     generateId: function () {
@@ -205,3 +145,68 @@ var Utils = {
     addEntry: addEntry,
     deleteEntry: deleteEntry
 };
+var app = express();
+
+var obj;
+app.use(express.static(__dirname + '/public'));
+app.use(express.json());
+
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname + '/public/index.html'));
+    //__dirname : It will resolve to your project folder.
+});
+
+app.get('/configuration', function (req, res) {
+    res.sendFile(path.join(__dirname + '/public/configuration.html'));
+});
+
+app.get('/save', function (req, res) {
+    fs.readFile('saves/last.json', 'utf8', function (err, data) {
+        if (err) throw err;
+        res.send(JSON.parse(data));
+    });
+});
+
+app.get('/steps', function (req, res) {
+    fs.readFile('saves/last.json', 'utf8', function (err, data) {
+        if (err) throw err;
+        res.send(JSON.parse(data).config.steps);
+    });
+});
+
+
+app.get('/sellers', function (req, res) {
+    res.send(utils.getData().sellers);
+});
+
+app.get('/sells', function (req, res) {
+    res.send({
+        data: utils.getCompleteSells()
+    })
+});
+
+app.post('/add/table', function (req, res) {
+    req.body.id = utils.generateId();
+    utils.addEntry(req.body);
+    res.send({
+        data: utils.getCompleteSells()
+    });
+});
+
+app.post('/sell/:id/:sellerId', function (req, res) {
+    utils.updateEntry(req.params.id, req.params.sellerId, req.body);
+    res.send({
+        data: utils.getCompleteSells()
+    });
+});
+
+app.delete('/sell/:id', function (req, res) {
+    utils.deleteEntry(req.params.id);
+    res.send({
+        data: utils.getCompleteSells()
+    });
+});
+
+app.listen(8080);
+
+console.log("Running at Port 8080");
