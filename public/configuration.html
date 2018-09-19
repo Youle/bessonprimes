@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Configuration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/styles/bulma.css">
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+<section class="hero is-primary">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                Configuration
+            </h1>
+            <h2 class="subtitle">
+                Cabinet Besson
+            </h2>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <span class="is-size-2">Primes</span>
+                <table class="table js-bounty-table">
+                    <thead>
+                    <tr>
+                        <th>Seuil</th>
+                        <th><abbr title="Pourcentage">%</abbr></th>
+                    </tr>
+                    </thead>
+                    <tbody class="js-bounty-table-body">
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="2"><div class="button is-primary is-pulled-right"><span class="fas fa-edit"></span></div></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="column">
+                <div class="is-size-2">Vendeurs</div>
+                <table class="table js-sellers-table">
+                    <thead>
+                        <tr>
+                            <td>Nom</td>
+                            <td><abbr title="Abbréviation">Abbr</abbr></td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript" src="/scripts/lib/font-awesome.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/lodash.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/require.js" data-main="../scripts/configuration.js"></script>
+</body>
+</html>

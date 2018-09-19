@@ -1,0 +1,23 @@
+{
+  "name": "besson_sale",
+  "version": "0.1.0",
+  "description": "Page to make some magic about sales benefits",
+  "main": "app.js",
+  "bin": "app.js",
+  "scripts": {
+    "package": "pkg package.json -t latest-win-x64 --out-path dist && cp ./node_modules/opn/xdg-open ./dist/xdg-open && cp"
+  },
+  "author": "Jules DELPLA",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "lodash": "^4.17.11"
+  },
+  "pkg": {
+    "assets": [
+      "./public/**/*",
+      "./public/*.html"
+    ],
+    "scripts": "./**/*.js"
+  }
+}
