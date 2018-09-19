@@ -1,0 +1,26 @@
+table.RowEditable tr input,
+table.RowEditable tr.is-editable span,
+table.RowEditable tr.is-editable .button.is-link,
+table.RowEditable tr .button.is-success {
+    display: none;
+}
+
+table.RowEditable tr.is-editable input,
+table.RowEditable tr.is-editable .button.is-success {
+    display: inherit;
+}
+
+table.RowEditable tr.is-editable .is-dependant-data {
+    opacity: .3;
+}
+
+.TableSection {
+    margin-bottom: 32px;
+}
+.TableSection .deleteButton {
+    visibility: hidden;
+}
+
+.TableSection:hover .deleteButton {
+    visibility: visible;
+}
