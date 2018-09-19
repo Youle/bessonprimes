@@ -1,8 +1,17 @@
 var express = require("express");
 var path = require("path");
-var utils = Utils;
 var _ = require('lodash');
-
+var utils = {
+    data: null,
+    getData: getData,
+    generateId: function () {
+        return Math.floor(Math.random() * 10000000).toString();
+    },
+    getCompleteSells: getCompleteSells,
+    updateEntry: updateEntry,
+    addEntry: addEntry,
+    deleteEntry: deleteEntry
+};
 var app = express();
 
 var fs = require('fs');
@@ -193,15 +202,3 @@ function deleteEntry(id) {
     });
     updateData(data);
 }
-
-var Utils = {
-    data: null,
-    getData: getData,
-    generateId: function () {
-        return Math.floor(Math.random() * 10000000).toString();
-    },
-    getCompleteSells: getCompleteSells,
-    updateEntry: updateEntry,
-    addEntry: addEntry,
-    deleteEntry: deleteEntry
-};
