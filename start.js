@@ -1,75 +1,7 @@
 var express = require("express");
 var path = require("path");
 var _ = require('lodash');
-var utils = {
-    data: null,
-    getData: getData,
-    generateId: function () {
-        return Math.floor(Math.random() * 10000000).toString();
-    },
-    getCompleteSells: getCompleteSells,
-    updateEntry: updateEntry,
-    addEntry: addEntry,
-    deleteEntry: deleteEntry
-};
-var app = express();
-
 var fs = require('fs');
-var obj;
-app.use(express.static(__dirname + '/public'));
-app.use(express.json());
-
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname + '/public/index.html'));
-    //__dirname : It will resolve to your project folder.
-});
-
-app.get('/configuration', function (req, res) {
-    res.sendFile(path.join(__dirname + '/public/configuration.html'));
-});
-
-app.get('/save', function(req, res) {
-    fs.readFile('saves/last.json', 'utf8', function (err, data) {
-        if (err) throw err;
-        res.send(JSON.parse(data));
-    });
-});
-
-app.get('/steps', function(req, res) {
-    fs.readFile('saves/last.json', 'utf8', function (err, data) {
-        if (err) throw err;
-        res.send(JSON.parse(data).config.steps);
-    });
-});
-
-
-app.get('/sellers', function(req, res) {
-    res.send(utils.getData().sellers);
-});
-
-app.get('/sells', function(req, res) {
-    res.send({data: utils.getCompleteSells()})
-});
-
-app.post('/add/table', function(req, res) {
-    req.body.id = utils.generateId();
-    utils.addEntry(req.body);
-    res.send({data: utils.getCompleteSells()});
-});
-
-app.post('/sell/:id/:sellerId', function(req, res){
-    utils.updateEntry(req.params.id, req.params.sellerId, req.body);
-    res.send({data: utils.getCompleteSells()});
-});
-
-app.delete('/sell/:id', function(req, res) {
-    utils.deleteEntry(req.params.id);
-    res.send({data: utils.getCompleteSells()});
-});
-
-app.listen(8080);
-
-console.log("Running at Port 3000");
 
 // pkg package.json --target latest-win-x64 -o bouty.exe
 
@@ -202,3 +134,71 @@ function deleteEntry(id) {
     });
     updateData(data);
 }
+var utils = {
+    data: null,
+    getData: getData,
+    generateId: function () {
+        return Math.floor(Math.random() * 10000000).toString();
+    },
+    getCompleteSells: getCompleteSells,
+    updateEntry: updateEntry,
+    addEntry: addEntry,
+    deleteEntry: deleteEntry
+};
+var app = express();
+
+var obj;
+app.use(express.static(__dirname + '/public'));
+app.use(express.json());
+
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname + '/public/index.html'));
+    //__dirname : It will resolve to your project folder.
+});
+
+app.get('/configuration', function (req, res) {
+    res.sendFile(path.join(__dirname + '/public/configuration.html'));
+});
+
+app.get('/save', function(req, res) {
+    fs.readFile('saves/last.json', 'utf8', function (err, data) {
+        if (err) throw err;
+        res.send(JSON.parse(data));
+    });
+});
+
+app.get('/steps', function(req, res) {
+    fs.readFile('saves/last.json', 'utf8', function (err, data) {
+        if (err) throw err;
+        res.send(JSON.parse(data).config.steps);
+    });
+});
+
+
+app.get('/sellers', function(req, res) {
+    res.send(utils.getData().sellers);
+});
+
+app.get('/sells', function(req, res) {
+    res.send({data: utils.getCompleteSells()})
+});
+
+app.post('/add/table', function(req, res) {
+    req.body.id = utils.generateId();
+    utils.addEntry(req.body);
+    res.send({data: utils.getCompleteSells()});
+});
+
+app.post('/sell/:id/:sellerId', function(req, res){
+    utils.updateEntry(req.params.id, req.params.sellerId, req.body);
+    res.send({data: utils.getCompleteSells()});
+});
+
+app.delete('/sell/:id', function(req, res) {
+    utils.deleteEntry(req.params.id);
+    res.send({data: utils.getCompleteSells()});
+});
+
+app.listen(8080);
+
+console.log("Running at Port 8080");
