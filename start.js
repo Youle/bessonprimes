@@ -10,10 +10,10 @@ function _getFile() {
 }
 
 function getData() {
-    if (!Utils.data) {
-        Utils.data = _getFile();
+    if (!utils.data) {
+        utils.data = _getFile();
     }
-    return Utils.data;
+    return utils.data;
 }
 
 function _getThresholds() {
@@ -50,7 +50,7 @@ function _calculateBounties(value) {
 
 function updateData(data) {
     fs.writeFileSync('saves/last.json', JSON.stringify(data), 'utf-8');
-    Utils.data = _getFile();
+    utils.data = _getFile();
     return getData();
 }
 
