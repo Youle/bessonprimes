@@ -54,13 +54,17 @@ require(['jquery', 'text!tpl/sell_form_row.ejs', 'text!tpl/sell_table.ejs', 'tex
                 url: '/sell/' + id + '/' + sellerId
             }).done(function(res) {
                 Sells.build(res)
+            }, function() {
+                location.reload();
             })
         },
         deleteEntry: function() {
             $.ajax({
                 type: 'DELETE',
                 url: '/sell/' + $(this).attr('data-target')
-            }).done(Sells.build)
+            }).done(Sells.build, function() {
+                location.reload();
+            })
         },
         bindEvents: function() {
             $('body').on('click.editRow', Sells.selectors.editRow, Sells.displayRowToForm)
@@ -112,6 +116,8 @@ require(['jquery', 'text!tpl/sell_form_row.ejs', 'text!tpl/sell_table.ejs', 'tex
                 console.log(res)
                 $(Form.selectors.show).removeClass('is-loading');
                 Sells.build(res);
+            }, function() {
+                location.reload();
             })
         },
         show: function() {
